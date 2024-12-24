@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>MaintenanceManager.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MaintenanceManager.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Random</span><span class="s2">;</span>
+<span class="s0">public class </span><span class="s1">MaintenanceManager </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">MaintenanceRecord</span><span class="s2">[] </span><span class="s1">maintenanceHistory </span><span class="s2">= </span><span class="s0">new </span><span class="s1">MaintenanceRecord</span><span class="s2">[</span><span class="s3">100</span><span class="s2">];</span>
+    <span class="s0">private </span><span class="s1">String</span><span class="s2">[] </span><span class="s1">serviceProviders </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">[</span><span class="s3">50</span><span class="s2">];</span>
+    <span class="s0">private </span><span class="s1">String</span><span class="s2">[] </span><span class="s1">providerIDs </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">[</span><span class="s3">50</span><span class="s2">];</span>
+    <span class="s0">private </span><span class="s1">String</span><span class="s2">[] </span><span class="s1">providerLocations </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">[</span><span class="s3">50</span><span class="s2">];</span>
+    <span class="s0">private int </span><span class="s1">maintenanceCount </span><span class="s2">= </span><span class="s3">0</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">providerCount </span><span class="s2">= </span><span class="s3">0</span><span class="s2">;</span>
+
+    <span class="s0">public void </span><span class="s1">scheduleMaintenance</span><span class="s2">(</span><span class="s1">String vehicleName</span><span class="s2">, </span><span class="s1">String task</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">maintenanceCount </span><span class="s2">&lt; </span><span class="s1">maintenanceHistory</span><span class="s2">.</span><span class="s1">length</span><span class="s2">) {</span>
+            <span class="s1">maintenanceHistory</span><span class="s2">[</span><span class="s1">maintenanceCount</span><span class="s2">++] = </span><span class="s0">new </span><span class="s1">MaintenanceRecord</span><span class="s2">(</span><span class="s1">vehicleName</span><span class="s2">, </span><span class="s1">task</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">vehicleName </span><span class="s2">+ </span><span class="s4">&quot; maintenance task ('&quot; </span><span class="s2">+ </span><span class="s1">task </span><span class="s2">+ </span><span class="s4">&quot;') has been scheduled.&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Maintenance history is full.&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">viewMaintenanceHistory</span><span class="s2">() {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Maintenance History:&quot;</span><span class="s2">);</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s3">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">maintenanceCount</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">maintenanceHistory</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">assignServiceProvider</span><span class="s2">(</span><span class="s1">String serviceProvider</span><span class="s2">, </span><span class="s1">String location</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">serviceProvider</span><span class="s2">.</span><span class="s1">matches</span><span class="s2">(</span><span class="s4">&quot;.</span><span class="s0">\\</span><span class="s4">d.&quot;</span><span class="s2">)) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Forbidden name. Please enter a valid name without numbers.&quot;</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">providerCount </span><span class="s2">&lt; </span><span class="s1">serviceProviders</span><span class="s2">.</span><span class="s1">length</span><span class="s2">) {</span>
+            <span class="s1">serviceProviders</span><span class="s2">[</span><span class="s1">providerCount</span><span class="s2">] = </span><span class="s1">serviceProvider</span><span class="s2">;</span>
+            <span class="s1">providerLocations</span><span class="s2">[</span><span class="s1">providerCount</span><span class="s2">] = </span><span class="s1">location</span><span class="s2">;</span>
+            <span class="s1">providerIDs</span><span class="s2">[</span><span class="s1">providerCount</span><span class="s2">] = </span><span class="s1">generateRandomID</span><span class="s2">();</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">serviceProvider </span><span class="s2">+ </span><span class="s4">&quot; has been assigned as a service provider.&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Location: &quot; </span><span class="s2">+ </span><span class="s1">location</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Assigned ID: &quot; </span><span class="s2">+ </span><span class="s1">providerIDs</span><span class="s2">[</span><span class="s1">providerCount</span><span class="s2">]);</span>
+            <span class="s1">providerCount</span><span class="s2">++;</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Service provider list is full.&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">viewServiceProviders</span><span class="s2">() {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Registered Service Providers:&quot;</span><span class="s2">);</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s3">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">providerCount</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Name: &quot; </span><span class="s2">+ </span><span class="s1">serviceProviders</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] + </span><span class="s4">&quot;, ID: &quot; </span><span class="s2">+ </span><span class="s1">providerIDs</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] + </span><span class="s4">&quot;, Location: &quot; </span><span class="s2">+ </span><span class="s1">providerLocations</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private </span><span class="s1">String generateRandomID</span><span class="s2">() {</span>
+        <span class="s1">String characters </span><span class="s2">= </span><span class="s4">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&quot;</span><span class="s2">;</span>
+        <span class="s1">StringBuilder randomID </span><span class="s2">= </span><span class="s0">new </span><span class="s1">StringBuilder</span><span class="s2">();</span>
+        <span class="s1">Random random </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Random</span><span class="s2">();</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s3">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s3">5</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">int </span><span class="s1">randomIndex </span><span class="s2">= </span><span class="s1">random</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">(</span><span class="s1">characters</span><span class="s2">.</span><span class="s1">length</span><span class="s2">());</span>
+            <span class="s1">randomID</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">characters</span><span class="s2">.</span><span class="s1">charAt</span><span class="s2">(</span><span class="s1">randomIndex</span><span class="s2">));</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">randomID</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">();</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>

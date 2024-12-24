@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>VehicleManagementSystemGUI.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+VehicleManagementSystemGUI.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionListener</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">VehicleManagementSystemGUI </span><span class="s0">extends </span><span class="s1">JFrame </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">JTextArea outputArea</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">MaintenanceManager maintenanceManager</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">VehicleManagementSystemGUI</span><span class="s2">() {</span>
+        <span class="s1">maintenanceManager </span><span class="s2">= </span><span class="s0">new </span><span class="s1">MaintenanceManager</span><span class="s2">();</span>
+
+
+        <span class="s1">setTitle</span><span class="s2">(</span><span class="s3">&quot;Vehicle Management System&quot;</span><span class="s2">);</span>
+        <span class="s1">setSize</span><span class="s2">(</span><span class="s4">500</span><span class="s2">, </span><span class="s4">400</span><span class="s2">);</span>
+        <span class="s1">setDefaultCloseOperation</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">EXIT_ON_CLOSE</span><span class="s2">);</span>
+        <span class="s1">setLocationRelativeTo</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+
+
+        <span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">BorderLayout</span><span class="s2">());</span>
+
+
+        <span class="s1">outputArea </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextArea</span><span class="s2">();</span>
+        <span class="s1">outputArea</span><span class="s2">.</span><span class="s1">setEditable</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">JScrollPane scrollPane </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JScrollPane</span><span class="s2">(</span><span class="s1">outputArea</span><span class="s2">);</span>
+        <span class="s1">add</span><span class="s2">(</span><span class="s1">scrollPane</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+
+
+        <span class="s1">JPanel buttonPanel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">();</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">GridLayout</span><span class="s2">(</span><span class="s4">5</span><span class="s2">, </span><span class="s4">1</span><span class="s2">, </span><span class="s4">10</span><span class="s2">, </span><span class="s4">10</span><span class="s2">));</span>
+
+
+        <span class="s1">JButton scheduleMaintenanceButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Schedule Maintenance&quot;</span><span class="s2">);</span>
+        <span class="s1">JButton viewHistoryButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;View Maintenance History&quot;</span><span class="s2">);</span>
+        <span class="s1">JButton assignProviderButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Assign Service Provider&quot;</span><span class="s2">);</span>
+        <span class="s1">JButton viewProvidersButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;View Service Providers&quot;</span><span class="s2">);</span>
+        <span class="s1">JButton exitButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Exit&quot;</span><span class="s2">);</span>
+
+
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">scheduleMaintenanceButton</span><span class="s2">);</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">viewHistoryButton</span><span class="s2">);</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">assignProviderButton</span><span class="s2">);</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">viewProvidersButton</span><span class="s2">);</span>
+        <span class="s1">buttonPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">exitButton</span><span class="s2">);</span>
+
+        <span class="s1">add</span><span class="s2">(</span><span class="s1">buttonPanel</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">WEST</span><span class="s2">);</span>
+
+
+        <span class="s1">scheduleMaintenanceButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">showScheduleMaintenanceDialog</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">viewHistoryButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">maintenanceManager</span><span class="s2">.</span><span class="s1">viewMaintenanceHistory</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">assignProviderButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">showAssignProviderDialog</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">viewProvidersButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">maintenanceManager</span><span class="s2">.</span><span class="s1">viewServiceProviders</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">exitButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">exit</span><span class="s2">(</span><span class="s4">0</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showScheduleMaintenanceDialog</span><span class="s2">() {</span>
+
+        <span class="s1">JTextField vehicleNameField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">();</span>
+        <span class="s1">JTextField vehicleColorField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">();</span>
+        <span class="s1">String</span><span class="s2">[] </span><span class="s1">categories </span><span class="s2">= {</span><span class="s3">&quot;Cat A&quot;</span><span class="s2">, </span><span class="s3">&quot;Cat B&quot;</span><span class="s2">, </span><span class="s3">&quot;Cat S&quot;</span><span class="s2">, </span><span class="s3">&quot;Cat N&quot;</span><span class="s2">};</span>
+        <span class="s1">JComboBox</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">categoryComboBox </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JComboBox</span><span class="s2">&lt;&gt;(</span><span class="s1">categories</span><span class="s2">);</span>
+        <span class="s1">String</span><span class="s2">[] </span><span class="s1">tasks </span><span class="s2">= {</span>
+                <span class="s3">&quot;Check tire pressure&quot;</span><span class="s2">, </span><span class="s3">&quot;Check the motor oil&quot;</span><span class="s2">, </span><span class="s3">&quot;Check other fluids&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Test headlights&quot;</span><span class="s2">, </span><span class="s3">&quot;Check wipers&quot;</span><span class="s2">, </span><span class="s3">&quot;Check air filter&quot;</span><span class="s2">, </span><span class="s3">&quot;Test battery&quot;</span>
+        <span class="s2">};</span>
+        <span class="s1">JComboBox</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">taskComboBox </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JComboBox</span><span class="s2">&lt;&gt;(</span><span class="s1">tasks</span><span class="s2">);</span>
+
+
+        <span class="s1">JPanel panel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">(</span><span class="s0">new </span><span class="s1">GridLayout</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s4">1</span><span class="s2">));</span>
+        <span class="s1">panel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Vehicle Name:&quot;</span><span class="s2">));</span>
+        <span class="s1">panel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">vehicleNameField</span><span class="s2">);</span>
+        <span class="s1">panel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Vehicle Color:&quot;</span><span class="s2">));</span>
+        <span class="s1">panel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">vehicleColorField</span><span class="s2">);</span>
+        <span class="s1">panel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Vehicle Category:&quot;</span><span class="s2">));</span>
+        <span class="s1">panel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">categoryComboBox</span><span class="s2">);</span>
+        <span class="s1">panel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Maintenance Task:&quot;</span><span class="s2">));</span>
+        <span class="s1">panel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">taskComboBox</span><span class="s2">);</span>
+
+        <span class="s0">int </span><span class="s1">option </span><span class="s2">= </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showConfirmDialog</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">panel</span><span class="s2">, </span><span class="s3">&quot;Schedule Maintenance&quot;</span><span class="s2">, </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">OK_CANCEL_OPTION</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">option </span><span class="s2">== </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">OK_OPTION</span><span class="s2">) {</span>
+            <span class="s1">String vehicleName </span><span class="s2">= </span><span class="s1">vehicleNameField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">();</span>
+            <span class="s1">String vehicleColor </span><span class="s2">= </span><span class="s1">vehicleColorField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">();</span>
+            <span class="s1">String category </span><span class="s2">= (</span><span class="s1">String</span><span class="s2">) </span><span class="s1">categoryComboBox</span><span class="s2">.</span><span class="s1">getSelectedItem</span><span class="s2">();</span>
+            <span class="s1">String task </span><span class="s2">= (</span><span class="s1">String</span><span class="s2">) </span><span class="s1">taskComboBox</span><span class="s2">.</span><span class="s1">getSelectedItem</span><span class="s2">();</span>
+
+            <span class="s1">maintenanceManager</span><span class="s2">.</span><span class="s1">scheduleMaintenance</span><span class="s2">(</span><span class="s1">vehicleName</span><span class="s2">, </span><span class="s1">task</span><span class="s2">);</span>
+            <span class="s1">outputArea</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;Scheduled maintenance for &quot; </span><span class="s2">+ </span><span class="s1">vehicleName </span><span class="s2">+ </span><span class="s3">&quot; (&quot; </span><span class="s2">+ </span><span class="s1">vehicleColor </span><span class="s2">+ </span><span class="s3">&quot;, &quot; </span><span class="s2">+ </span><span class="s1">category </span><span class="s2">+ </span><span class="s3">&quot;): &quot; </span><span class="s2">+ </span><span class="s1">task </span><span class="s2">+ </span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showAssignProviderDialog</span><span class="s2">() {</span>
+        <span class="s1">JTextField providerNameField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">();</span>
+        <span class="s1">JTextField providerLocationField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">();</span>
+
+        <span class="s1">JPanel panel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">(</span><span class="s0">new </span><span class="s1">GridLayout</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s4">1</span><span class="s2">));</span>
+        <span class="s1">panel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Provider Name:&quot;</span><span class="s2">));</span>
+        <span class="s1">panel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">providerNameField</span><span class="s2">);</span>
+        <span class="s1">panel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Provider Location:&quot;</span><span class="s2">));</span>
+        <span class="s1">panel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">providerLocationField</span><span class="s2">);</span>
+
+        <span class="s0">int </span><span class="s1">option </span><span class="s2">= </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showConfirmDialog</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">panel</span><span class="s2">, </span><span class="s3">&quot;Assign Service Provider&quot;</span><span class="s2">, </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">OK_CANCEL_OPTION</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">option </span><span class="s2">== </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">OK_OPTION</span><span class="s2">) {</span>
+            <span class="s1">String providerName </span><span class="s2">= </span><span class="s1">providerNameField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">();</span>
+            <span class="s1">String location </span><span class="s2">= </span><span class="s1">providerLocationField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">();</span>
+            <span class="s1">maintenanceManager</span><span class="s2">.</span><span class="s1">assignServiceProvider</span><span class="s2">(</span><span class="s1">providerName</span><span class="s2">, </span><span class="s1">location</span><span class="s2">);</span>
+            <span class="s1">outputArea</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;Assigned service provider: &quot; </span><span class="s2">+ </span><span class="s1">providerName </span><span class="s2">+ </span><span class="s3">&quot; at &quot; </span><span class="s2">+ </span><span class="s1">location </span><span class="s2">+ </span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">SwingUtilities</span><span class="s2">.</span><span class="s1">invokeLater</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Runnable</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">run</span><span class="s2">() {</span>
+                <span class="s0">new </span><span class="s1">VehicleManagementSystemGUI</span><span class="s2">().</span><span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
